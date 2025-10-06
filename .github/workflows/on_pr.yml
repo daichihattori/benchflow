@@ -12,7 +12,6 @@ jobs:
       matrix:
         include:
           - runner: ubuntu-latest
-          - runner: xi-gpu
     runs-on: ${{ matrix.runner }}
     steps:
       - name: Checkout code
