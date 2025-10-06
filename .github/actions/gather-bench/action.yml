@@ -15,7 +15,7 @@ runs:
         mkdir -p benchmark-results
 
     - name: Download all artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         path: ${{ github.run_id }}
 
