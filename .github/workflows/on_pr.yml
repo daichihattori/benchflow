@@ -26,6 +26,7 @@ jobs:
           benchmark-filename: ${{ matrix.runner }}.json
 
   gather-bench:
+    needs: create-bench
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
