@@ -3,6 +3,9 @@ name: On PR
 # TODO: consider about main branch
 on: pull_request
 
+permissions:
+  contents: write
+
 env:
   UV_SYSTEM_PYTHON: 1
 
@@ -31,6 +34,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          fetch-depth: 0
 
       - name: Sanitize branch name
         id: branches
