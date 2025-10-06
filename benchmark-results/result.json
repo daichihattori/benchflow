@@ -1,0 +1,20 @@
+[
+  {
+    "filename": "ubuntu-latest.json",
+    "data": {
+      "machine_info": {
+        "processor": "x86_64"
+      },
+      "benchmarks": [
+        {
+          "name": "test_fib",
+          "min": 0.000854975999970975,
+          "max": 0.0010840329999837195,
+          "mean": 0.0008674421702131982,
+          "stddev": 0.0000096280487755364,
+          "rounds": 1175
+        }
+      ]
+    }
+  }
+]

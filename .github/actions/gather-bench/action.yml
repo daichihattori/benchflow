@@ -15,14 +15,15 @@ runs:
         mkdir -p benchmark-results
 
     - name: Download all artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         path: ${{ github.run_id }}
 
     - name: Merge JSON files
       shell: bash
       run: |
-        jq -s 'map({filename: (input_filename | split("/")[-1]), data: .})' ${{ github.run_id }}/*.json \
+        jq -n '[inputs as $d | {filename: (input_filename | split("/")[-1]), data: $d}]' \
+          ${{ github.run_id }}/**/*.json \
           > benchmark-results/${{ inputs.gathered-filename }}
 
     - name: Commit and push diff

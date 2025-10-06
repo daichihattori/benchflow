@@ -3,6 +3,9 @@ name: On PR
 # TODO: consider about main branch
 on: pull_request
 
+permissions:
+  contents: write
+
 env:
   UV_SYSTEM_PYTHON: 1
 
@@ -12,7 +15,6 @@ jobs:
       matrix:
         include:
           - runner: ubuntu-latest
-          - runner: xi-gpu
     runs-on: ${{ matrix.runner }}
     steps:
       - name: Checkout code
@@ -27,16 +29,16 @@ jobs:
           benchmark-filename: ${{ matrix.runner }}.json
 
   gather-bench:
+    needs: create-bench
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Sanitize branch name
-        id: branches
-        uses: transferwise/sanitize-branch-name@v1
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          fetch-depth: 0
 
       - name: Gather benchmark
         uses: ./.github/actions/gather-bench
         with:
-          gathered-filename: ${{steps.branches.outputs.sanitized-branch-name}}.json
+          gathered-filename: result.json
