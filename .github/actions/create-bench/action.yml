@@ -23,3 +23,4 @@ runs:
       with:
         name: ${{ inputs.benchmark-filename }}
         path: ${{ github.run_id }}
+        retention-days: 3
