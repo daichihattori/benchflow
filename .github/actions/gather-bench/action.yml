@@ -1,0 +1,40 @@
+name: Gather Benchmarks
+description: Composite action to gather benchmark JSON files into a single merged JSON artifact.
+
+inputs:
+  gathered-filename:
+    description: "Filename for the merged benchmark JSON"
+    required: false
+
+runs:
+  using: composite
+  steps:
+    - name: Make Gathered directory
+      shell: bash
+      run: |
+        mkdir -p benchmark-results
+
+    - name: Download all artifacts
+      uses: actions/download-artifact@v3
+      with:
+        path: ${{ github.run_id }}
+
+    - name: Merge JSON files
+      shell: bash
+      run: |
+        jq -s 'map({filename: (input_filename | split("/")[-1]), data: .})' ${{ github.run_id }}/*.json \
+          > benchmark-results/${{ inputs.gathered-filename }}
+
+    - name: Commit and push diff
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
+        git add benchmark-results/${{ inputs.gathered-filename }}
+        if ! git diff --cached --quiet; then
+          git commit -m "Update benchmark results"
+          git push
+        else
+          echo "No changes to commit"
+        fi
+      shell: bash

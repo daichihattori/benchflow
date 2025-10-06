@@ -1,0 +1,25 @@
+name: Create Bench
+description: benchmark library & upload it to github artifact
+
+inputs:
+  benchmark-filename:
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: make benchmark-results directory
+      shell: bash
+      run: |
+        mkdir -p ${{ github.run_id }}
+
+    - name: bench library
+      shell: bash
+      run: |
+        uv run python -m pytest --benchmark-only --benchmark-json=${{ github.run_id }}/${{ inputs.benchmark-filename }}
+
+    - name: Upload benchmark results
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.benchmark-filename }}
+        path: ${{ github.run_id }}

@@ -1,0 +1,42 @@
+name: On PR
+
+# TODO: consider about main branch
+on: pull_request
+
+env:
+  UV_SYSTEM_PYTHON: 1
+
+jobs:
+  create-bench:
+    strategy:
+      matrix:
+        include:
+          - runner: ubuntu-latest
+          - runner: xi-gpu
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up python
+        uses: ./.github/actions/setup-python
+
+      - name: Create benchmark
+        uses: ./.github/actions/create-bench
+        with:
+          benchmark-filename: ${{ matrix.runner }}.json
+
+  gather-bench:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Sanitize branch name
+        id: branches
+        uses: transferwise/sanitize-branch-name@v1
+
+      - name: Gather benchmark
+        uses: ./.github/actions/gather-bench
+        with:
+          gathered-filename: ${{steps.branches.outputs.sanitized-branch-name}}.json
