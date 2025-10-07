@@ -3,16 +3,36 @@
     "filename": "ubuntu-latest.json",
     "data": {
       "machine_info": {
-        "processor": "x86_64"
+        "processor": "x86_64",
+        "system": "Linux"
       },
       "benchmarks": [
         {
           "name": "test_fib",
-          "min": 0.0008317169999969565,
-          "max": 0.0011557639999963953,
-          "mean": 0.0008415082599154613,
-          "stddev": 0.000010814594609276184,
-          "rounds": 1185
+          "min": 0.000798353999996948,
+          "max": 0.0014271900000011328,
+          "mean": 0.0008736751250001703,
+          "stddev": 0.000027031723631436222,
+          "rounds": 1152
+        }
+      ]
+    }
+  },
+  {
+    "filename": "windows-latest.json",
+    "data": {
+      "machine_info": {
+        "processor": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD",
+        "system": "Windows"
+      },
+      "benchmarks": [
+        {
+          "name": "test_fib",
+          "min": 0.0010472000000163462,
+          "max": 0.0019978999999921143,
+          "mean": 0.001170424179431321,
+          "stddev": 0.00012813879820601528,
+          "rounds": 914
         }
       ]
     }
