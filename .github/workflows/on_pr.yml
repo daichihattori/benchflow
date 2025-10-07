@@ -15,6 +15,7 @@ jobs:
       matrix:
         include:
           - runner: ubuntu-latest
+          - runner: windows-latest
     runs-on: ${{ matrix.runner }}
     steps:
       - name: Checkout code
