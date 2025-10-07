@@ -9,10 +9,10 @@
       "benchmarks": [
         {
           "name": "test_fib",
-          "min": 0.005443736000000143,
-          "max": 0.006056653999998218,
-          "mean": 0.005719955750000061,
-          "stddev": 0.00020301727810388765,
+          "min": 0.00562922900000018,
+          "max": 0.0059797239999994645,
+          "mean": 0.00578131649999758,
+          "stddev": 0.0001494786478241552,
           "rounds": 8
         }
       ]
@@ -22,17 +22,17 @@
     "filename": "windows-latest.json",
     "data": {
       "machine_info": {
-        "processor": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD",
+        "processor": "Intel64 Family 6 Model 106 Stepping 6, GenuineIntel",
         "system": "Windows"
       },
       "benchmarks": [
         {
           "name": "test_fib",
-          "min": 0.06332780000002458,
-          "max": 0.07961479999994481,
-          "mean": 0.07148216249996153,
-          "stddev": 0.006274387615785035,
-          "rounds": 8
+          "min": 0.0611316000001807,
+          "max": 0.07671120000009068,
+          "mean": 0.06567187142854891,
+          "stddev": 0.005530548764757914,
+          "rounds": 7
         }
       ]
     }
