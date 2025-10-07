@@ -19,6 +19,7 @@ def pytest_benchmark_generate_json(
     return {
         "machine_info": {
             "processor": machine_info.get("processor"),
+            "system": machine_info.get("system"),
         },
         "benchmarks": results,
     }
